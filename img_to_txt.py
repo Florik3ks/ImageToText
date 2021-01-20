@@ -22,7 +22,7 @@ def add_dot_position(x, y):
     nx = x % 2
     ny = y % 4
 
-    if pix[x, y] == 0:
+    if pix[x, y] == 255:
         return pos[ny][nx]
     return "0"
 
