@@ -1,9 +1,9 @@
 from PIL import Image
-
+print("---\nNote: This looks inverted if yout texteditor has a white background and black text.\nChange the 255 in line 27 to 0 if you want to use this with a white background and black text.\n---")
 filename = input("input file name (file in the img-folder): ")
 print("Please wait..")
 
-im = Image.open("img/"+ filename)
+im = Image.open("img/" + filename)
 
 r = im.convert('1')
 ratio = .5
@@ -12,11 +12,13 @@ im = r
 pix = r.load()
 
 # returns a hex value to be added to the dot position at [x y]
+
+
 def add_dot_position(x, y):
     # https://en.wikipedia.org/wiki/Braille_Patterns
     pos = [["1", "8", ],
-           ["2", "10",],
-           ["4", "20",],
+           ["2", "10", ],
+           ["4", "20", ],
            ["40", "80"]]
 
     nx = x % 2
@@ -27,6 +29,8 @@ def add_dot_position(x, y):
     return "0"
 
 # returns the position in the array for a pixel at [x y]
+
+
 def get_arr_position(x, y):
     return x // 2, y // 4
 
@@ -37,7 +41,7 @@ for y in range(im.height // 4):
 
 for y in range((im.height // 4) * 4):
     for x in range((im.width // 2) * 2):
-        nx, ny = get_arr_position(x,y)
+        nx, ny = get_arr_position(x, y)
         value = hex(int(dots[ny][nx], 16) + int(add_dot_position(x, y), 16))
         dots[ny][nx] = value
 
